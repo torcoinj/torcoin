@@ -48,14 +48,14 @@ public:
         genesis.nVersion = 1;
         genesis.nTime    = 1417976555;
         genesis.nBits    = 0x1e0fffff;
-        genesis.nNonce   = 0;
+        genesis.nNonce   = 808716;
         
         //// debug print
         hashGenesisBlock = genesis.GetHash();
-        while (hashGenesisBlock > bnProofOfWorkLimit.getuint256()){
-            if (++genesis.nNonce==0) break;
-            hashGenesisBlock = genesis.GetHash();
-        }
+        //while (hashGenesisBlock > bnProofOfWorkLimit.getuint256()){
+        //    if (++genesis.nNonce==0) break;
+        //    hashGenesisBlock = genesis.GetHash();
+        //}
 
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", genesis.hashMerkleRoot.ToString().c_str());
@@ -63,8 +63,8 @@ public:
         genesis.print();
         
         
-        assert(hashGenesisBlock == uint256("0x"));
-        assert(genesis.hashMerkleRoot == uint256("0x"));
+        assert(hashGenesisBlock == uint256("0x00000b4c01503b3b9ff5b495f64a98c24904f5adeec4e9968a7df7e83a32e054"));
+        assert(genesis.hashMerkleRoot == uint256("0x35092c853d3ffee3966da94efca896e1067da512d4d79e442ca4c84349962fbf"));
 
         vSeeds.push_back(CDNSSeedData("73.167.60.64", "73.167.60.64"));
 
