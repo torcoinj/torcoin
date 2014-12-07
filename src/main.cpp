@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
-// Copyright (c) 2013 ABCCoin developers
+// Copyright (c) 2013 TorCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -66,7 +66,7 @@ map<uint256, map<uint256, CDataStream*> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "ABCCoin Signed Message:\n";
+const string strMessageMagic = "TorCoin Signed Message:\n";
 
 double dHashesPerSec = 0.0;
 int64 nHPSTimerStart = 0;
@@ -4598,7 +4598,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
         return false;
 
     //// debug print
-    printf("ABCCoinMiner:\n");
+    printf("TorCoinMiner:\n");
     printf("proof-of-work found  \n  hash: %s  \ntarget: %s\n", hash.GetHex().c_str(), hashTarget.GetHex().c_str());
     pblock->print();
     printf("generated %s\n", FormatMoney(pblock->vtx[0].vout[0].nValue).c_str());
@@ -4607,7 +4607,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     {
         LOCK(cs_main);
         if (pblock->hashPrevBlock != hashBestChain)
-            return error("ABCCoinMiner : generated block is stale");
+            return error("TorCoinMiner : generated block is stale");
 
         // Remove key from key pool
         reservekey.KeepKey();
@@ -4621,7 +4621,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
         // Process this block the same as if we had received it from another node
         CValidationState state;
         if (!ProcessBlock(state, NULL, pblock))
-            return error("ABCCoinMiner : ProcessBlock, block not accepted");
+            return error("TorCoinMiner : ProcessBlock, block not accepted");
     }
 
     return true;
@@ -4629,7 +4629,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
 
 void static BitcoinMiner(CWallet *pwallet)
 {
-    printf("ABCCoinMiner started\n");
+    printf("TorCoinMiner started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
     RenameThread("bitcoin-miner");
 
@@ -4657,7 +4657,7 @@ void static BitcoinMiner(CWallet *pwallet)
         CBlock *pblock = &pblocktemplate->block;
         IncrementExtraNonce(pblock, pindexPrev, nExtraNonce);
 
-        printf("Running ABCCoinMiner with %"PRIszu" transactions in block (%u bytes)\n", pblock->vtx.size(),
+        printf("Running TorCoinMiner with %"PRIszu" transactions in block (%u bytes)\n", pblock->vtx.size(),
                ::GetSerializeSize(*pblock, SER_NETWORK, PROTOCOL_VERSION));
 
         //
@@ -4768,7 +4768,7 @@ void static BitcoinMiner(CWallet *pwallet)
     } }
     catch (boost::thread_interrupted)
     {
-        printf("ABCCoinMiner terminated\n");
+        printf("TorCoinMiner terminated\n");
         throw;
     }
 }
