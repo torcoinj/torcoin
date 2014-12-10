@@ -29,26 +29,26 @@ public:
         pchMessageStart[3] = 0x2c;
         nDefaultPort = 6530;
         nRPCPort = 6531;
-        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20);
+        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 32);
         nSubsidyHalvingInterval = 100000;
 
         // Build the genesis block. Note that the output of the genesis coinbase cannot
         // be spent as it did not originally exist in the database.
   
-        const char* pszTimestamp = "TorCoin";
+        const char* pszTimestamp = "May the force be with you";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].nValue = 1 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("") << OP_CHECKSIG;
+        txNew.vout[0].nValue = 50 * COIN;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61dfb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
         genesis.nTime    = 1417976555;
-        genesis.nBits    = 0x1e0fffff;
-        genesis.nNonce   = 808716;
+        genesis.nBits    = 0x1d00ffff;
+        genesis.nNonce   = 2541164328;
         
         //// debug print
         hashGenesisBlock = genesis.GetHash();
@@ -63,10 +63,10 @@ public:
         genesis.print();
         
         
-        assert(hashGenesisBlock == uint256("0x00000b4c01503b3b9ff5b495f64a98c24904f5adeec4e9968a7df7e83a32e054"));
-        assert(genesis.hashMerkleRoot == uint256("0x35092c853d3ffee3966da94efca896e1067da512d4d79e442ca4c84349962fbf"));
+        assert(hashGenesisBlock == uint256("0x000000004380b9d645ec3dc4cdd83919fac6f6a6094b6a099624a01023606214"));
+        assert(genesis.hashMerkleRoot == uint256("0x9f16973b8f172c5338c9b12b94ace162bcef730ae098d4ac04cdfefb44f5e44e"));
 
-        vSeeds.push_back(CDNSSeedData("73.167.60.64", "73.167.60.64"));
+        vSeeds.push_back(CDNSSeedData("benjaminchrobot.com", "benjaminchrobot.com"));
 
 
         base58Prefixes[PUBKEY_ADDRESS] = 80;
