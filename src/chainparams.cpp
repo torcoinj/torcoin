@@ -34,6 +34,16 @@ public:
 
         // Build the genesis block. Note that the output of the genesis coinbase cannot
         // be spent as it did not originally exist in the database.
+
+        // 04ffff001d01044c5d4e657720596f726b2054696d65732032382f4e6f762f3230313420452e552e205061726c69616d656e7420506173736573204d65617375726520746f20427265616b20557020476f6f676c6520696e2053796d626f6c696320566f7465
+        // algorithm: SHA256
+        // merkle hash: 7d384db54a917d6e8ff696fe415656d22623771cb1aad0c7a61e4b56eb48ccfd
+        // pszTimestamp: New York Times 28/Nov/2014 E.U. Parliament Passes Measure to Break Up Google in Symbolic Vote
+        // pubkey: 04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f
+        // time: 1418154266
+        // bits: 0x1e0ffff0
+        // nonce: 946985
+        // genesis hash: 000005907642e23edfb0db1caf109296822b4f0cda74b609490ae71b6ad74c0a
   
         const char* pszTimestamp = "May the force be with you";
         CTransaction txNew;
@@ -66,7 +76,8 @@ public:
         assert(hashGenesisBlock == uint256("0x000000004380b9d645ec3dc4cdd83919fac6f6a6094b6a099624a01023606214"));
         assert(genesis.hashMerkleRoot == uint256("0x9f16973b8f172c5338c9b12b94ace162bcef730ae098d4ac04cdfefb44f5e44e"));
 
-        vSeeds.push_back(CDNSSeedData("benjaminchrobot.com", "benjaminchrobot.com"));
+        vSeeds.push_back(CDNSSeedData("torcoin.benjaminchrobot.com", "torcoin.benjaminchrobot.com"));
+
 
 
         base58Prefixes[PUBKEY_ADDRESS] = 80;
