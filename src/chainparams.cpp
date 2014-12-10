@@ -34,8 +34,18 @@ public:
 
         // Build the genesis block. Note that the output of the genesis coinbase cannot
         // be spent as it did not originally exist in the database.
+
+        // 04ffff001d01044c5d4e657720596f726b2054696d65732032382f4e6f762f3230313420452e552e205061726c69616d656e7420506173736573204d65617375726520746f20427265616b20557020476f6f676c6520696e2053796d626f6c696320566f7465
+        // algorithm: SHA256
+        // merkle hash: 7d384db54a917d6e8ff696fe415656d22623771cb1aad0c7a61e4b56eb48ccfd
+        // pszTimestamp: New York Times 28/Nov/2014 E.U. Parliament Passes Measure to Break Up Google in Symbolic Vote
+        // pubkey: 04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f
+        // time: 1418154266
+        // bits: 0x1e0ffff0
+        // nonce: 946985
+        // genesis hash: 000005907642e23edfb0db1caf109296822b4f0cda74b609490ae71b6ad74c0a
   
-        const char* pszTimestamp = "TorCoin";
+        const char* pszTimestamp = "New York Times 28/Nov/2014 E.U. Parliament Passes Measure to Break Up Google in Symbolic Vote";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -46,9 +56,9 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1417976555;
-        genesis.nBits    = 0x1e0fffff;
-        genesis.nNonce   = 808716;
+        genesis.nTime    = 1418154266;
+        genesis.nBits    = 0x1e0ffff0;
+        genesis.nNonce   = 946985;
         
         //// debug print
         hashGenesisBlock = genesis.GetHash();
@@ -63,10 +73,10 @@ public:
         genesis.print();
         
         
-        assert(hashGenesisBlock == uint256("0x00000b4c01503b3b9ff5b495f64a98c24904f5adeec4e9968a7df7e83a32e054"));
-        assert(genesis.hashMerkleRoot == uint256("0x35092c853d3ffee3966da94efca896e1067da512d4d79e442ca4c84349962fbf"));
+        assert(hashGenesisBlock == uint256("0x000005907642e23edfb0db1caf109296822b4f0cda74b609490ae71b6ad74c0a"));
+        assert(genesis.hashMerkleRoot == uint256("0x7d384db54a917d6e8ff696fe415656d22623771cb1aad0c7a61e4b56eb48ccfd"));
 
-        vSeeds.push_back(CDNSSeedData("73.167.60.64", "73.167.60.64"));
+        vSeeds.push_back(CDNSSeedData("torcoin.benjaminchrobot.com", "torcoin.benjaminchrobot.com"));
 
 
         base58Prefixes[PUBKEY_ADDRESS] = 80;
