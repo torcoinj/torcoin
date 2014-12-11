@@ -196,7 +196,6 @@ public:
     (
         READWRITE(this->nVersion);
         nVersion = this->nVersion;
-        type = type->type
         READWRITE(vin);
         READWRITE(vout);
         READWRITE(nLockTime);
