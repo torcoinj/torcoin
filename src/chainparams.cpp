@@ -29,7 +29,7 @@ public:
         pchMessageStart[3] = 0x2c;
         nDefaultPort = 6530;
         nRPCPort = 6531;
-        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 32);
+        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 22);
         nSubsidyHalvingInterval = 100000;
 
         // Build the genesis block. Note that the output of the genesis coinbase cannot
@@ -57,8 +57,8 @@ public:
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
         genesis.nTime    = 1417976555;
-        genesis.nBits    = 0x1d00ffff;
-        genesis.nNonce   = 2541164328;
+        genesis.nBits    = bnProofOfWorkLimit.GetCompact();
+        genesis.nNonce   = 2508269;
         
         //// debug print
         hashGenesisBlock = genesis.GetHash();
@@ -73,7 +73,7 @@ public:
         genesis.print();
         
         
-        assert(hashGenesisBlock == uint256("0x000000004380b9d645ec3dc4cdd83919fac6f6a6094b6a099624a01023606214"));
+        assert(hashGenesisBlock == uint256("0x0000010497296153a3a1802e5b8363d2a115a3442bad7d92a50942b1e4f41f92"));
         assert(genesis.hashMerkleRoot == uint256("0x9f16973b8f172c5338c9b12b94ace162bcef730ae098d4ac04cdfefb44f5e44e"));
 
         vSeeds.push_back(CDNSSeedData("torcoin.benjaminchrobot.com", "torcoin.benjaminchrobot.com"));
