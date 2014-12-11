@@ -23,10 +23,10 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         // The message start string is designed to be unlikely to occur in normal data.
-        pchMessageStart[0] = 0xb1;
-        pchMessageStart[1] = 0xc5;
-        pchMessageStart[2] = 0x4f;
-        pchMessageStart[3] = 0x2c;
+        pchMessageStart[0] = 0x04;
+        pchMessageStart[1] = 0x04;
+        pchMessageStart[2] = 0x04;
+        pchMessageStart[3] = 0x04;
         nDefaultPort = 6530;
         nRPCPort = 6531;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20);
@@ -34,22 +34,21 @@ public:
 
         // Build the genesis block. Note that the output of the genesis coinbase cannot
         // be spent as it did not originally exist in the database.
-
+  
         /**
-        04ffff001d01044c5d4e657720596f726b2054696d65732032382f4e6f762f3230313420452e552e205061726c69616d656e7420506173736573204d65617375726520746f20427265616b20557020476f6f676c6520696e2053796d626f6c696320566f7465
+        04ffff001d01044c574e592054696d65732032372f4e6f762f3230313420452e552e205061726c69616d656e7420506173736573204d65617375726520746f20427265616b20557020476f6f676c6520696e2053796d626f6c696320566f7465
         algorithm: SHA256
-        merkle hash: 7d384db54a917d6e8ff696fe415656d22623771cb1aad0c7a61e4b56eb48ccfd
-        pszTimestamp: New York Times 28/Nov/2014 E.U. Parliament Passes Measure to Break Up Google in Symbolic Vote
+        merkle hash: 5be500badb37f4976ef92fc1898de0e26b5c5d17a51643645ea260ca695a6f40
+        pszTimestamp: NY Times 27/Nov/2014 E.U. Parliament Passes Measure to Break Up Google in Symbolic Vote
         pubkey: 04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f
-        time: 1418276300
+        time: 1418280815
         bits: 0x1e08ffff
         Searching for genesis hash..
-        97746.0 hash/s, estimate: 0.0 hgenesis hash found!
-        nonce: 3326936
-        genesis hash: 000002b3db8ccc701dda432d67b1c4260b32de85bf06080a15a59471c777a3b4
+        102872.0 hash/s, estimate: 0.0 hgenesis hash found!
+        nonce: 166699
+        genesis hash: 000005f809b117a3d8ac7e2a6d96496ae511352be1a29a7e4f709436f3e52a09
         **/
-  
-        const char* pszTimestamp = "New York Times 28/Nov/2014 E.U. Parliament Passes Measure to Break Up Google in Symbolic Vote";
+        const char* pszTimestamp = "NY Times 27/Nov/2014 E.U. Parliament Passes Measure to Break Up Google in Symbolic Vote";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -60,9 +59,9 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1418276300;
-        genesis.nBits    = 0x1e08ffff;
-        genesis.nNonce   = 3326936;
+        genesis.nTime    = 1300000000;
+        genesis.nBits    = 0x1e0fffff;
+        genesis.nNonce   = 0;
         
         //// debug print
         hashGenesisBlock = genesis.GetHash();
@@ -71,35 +70,35 @@ public:
         //    hashGenesisBlock = genesis.GetHash();
         //}
 
-        // printf("%s\n", hashGenesisBlock.ToString().c_str());
-        // printf("%s\n", genesis.hashMerkleRoot.ToString().c_str());
-        // printf("%x\n", bnProofOfWorkLimit.GetCompact());
-        // genesis.print();
+        printf("%s\n", hashGenesisBlock.ToString().c_str());
+        printf("%s\n", genesis.hashMerkleRoot.ToString().c_str());
+        printf("%x\n", bnProofOfWorkLimit.GetCompact());
+        genesis.print();
         
         
-        assert(hashGenesisBlock == uint256("0x000002b3db8ccc701dda432d67b1c4260b32de85bf06080a15a59471c777a3b4"));
-        assert(genesis.hashMerkleRoot == uint256("0x7d384db54a917d6e8ff696fe415656d22623771cb1aad0c7a61e4b56eb48ccfd"));
+        assert(hashGenesisBlock == uint256("0x000005f809b117a3d8ac7e2a6d96496ae511352be1a29a7e4f709436f3e52a09"));
+        assert(genesis.hashMerkleRoot == uint256("0x5be500badb37f4976ef92fc1898de0e26b5c5d17a51643645ea260ca695a6f40"));
 
-        vSeeds.push_back(CDNSSeedData("torcoin.benjaminchrobot.com", "torcoin.benjaminchrobot.com"));
+        vSeeds.push_back(CDNSSeedData("torcoin.benjaminchrobot.com", "seed.torcoin.benjaminchrobot.com"));
 
 
-        base58Prefixes[PUBKEY_ADDRESS] = 80;
+        base58Prefixes[PUBKEY_ADDRESS] = 36;
         base58Prefixes[SCRIPT_ADDRESS] = 30;
         base58Prefixes[SECRET_KEY] = 224;
 
         // Convert the pnSeeds array into usable address objects.
-        for (unsigned int i = 0; i < ARRAYLEN(pnSeed); i++)
-        {
-            // It'll only connect to one or two seed nodes because once it connects,
-            // it'll get a pile of addresses with newer timestamps.
-            // Seed nodes are given a random 'last seen time' 
-            const int64 nTwoDays = 2 * 24 * 60 * 60;
-            struct in_addr ip;
-            memcpy(&ip, &pnSeed[i], sizeof(ip));
-            CAddress addr(CService(ip, GetDefaultPort()));
-            addr.nTime = GetTime() - GetRand(nTwoDays) - nTwoDays;
-            vFixedSeeds.push_back(addr);
-        }
+        // for (unsigned int i = 0; i < ARRAYLEN(pnSeed); i++)
+        // {
+        //     // It'll only connect to one or two seed nodes because once it connects,
+        //     // it'll get a pile of addresses with newer timestamps.
+        //     // Seed nodes are given a random 'last seen time' 
+        //     const int64 nTwoDays = 2 * 24 * 60 * 60;
+        //     struct in_addr ip;
+        //     memcpy(&ip, &pnSeed[i], sizeof(ip));
+        //     CAddress addr(CService(ip, GetDefaultPort()));
+        //     addr.nTime = GetTime() - GetRand(nTwoDays) - nTwoDays;
+        //     vFixedSeeds.push_back(addr);
+        // }
     }
 
     virtual const CBlock& GenesisBlock() const { return genesis; }
@@ -148,7 +147,7 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        // vSeeds.push_back(CDNSSeedData("torcoin.test", "test.torcoin.org"));
+        // vSeeds.push_back(CDNSSeedData("abccoin.test", "test.abccoin.org"));
 
         base58Prefixes[PUBKEY_ADDRESS] = 130;
         base58Prefixes[SCRIPT_ADDRESS] = 30;
