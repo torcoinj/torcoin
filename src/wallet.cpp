@@ -1171,7 +1171,7 @@ bool CWallet::SelectCoins(int64 nTargetValue, set<pair<const CWalletTx*,unsigned
 
 
 
-bool CWallet::CreateTransaction(const vector<pair<CScript, int64> >& vecSend, int, type
+bool CWallet::CreateTransaction(const vector<pair<CScript, int64> >& vecSend, int type,
                                 CWalletTx& wtxNew, CReserveKey& reservekey, int64& nFeeRet, std::string& strFailReason)
 {
     if (type < 1 || type > 3)
