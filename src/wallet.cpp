@@ -1416,8 +1416,12 @@ string CWallet::SendMoney(CScript scriptPubKey, int64 nValue, CWalletTx& wtxNew,
 
 
 
-string CWallet::SendMoneyToDestination(const CTxDestination& address, int64 nValue, CWalletTx& wtxNew, bool fAskFee)
+string CWallet::SendMoneyToDestination(const CTxDestination& address, int type, int64 nValue, CWalletTx& wtxNew, bool fAskFee)
 {
+    // Check amount
+    if (type < 1 || type > 3)
+        return _("Invalid type");
+
     // Check amount
     if (nValue <= 0)
         return _("Invalid amount");
@@ -1428,7 +1432,7 @@ string CWallet::SendMoneyToDestination(const CTxDestination& address, int64 nVal
     CScript scriptPubKey;
     scriptPubKey.SetDestination(address);
 
-    return SendMoney(scriptPubKey, nValue, wtxNew, fAskFee);
+    return SendMoney(scriptPubKey, type, nValue, wtxNew, fAskFee);
 }
 
 
