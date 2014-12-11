@@ -180,8 +180,9 @@ class CTransaction
 public:
     static int64 nMinTxFee;
     static int64 nMinRelayTxFee;
-    static const int CURRENT_VERSION=1;
+    static const int CURRENT_VERSION=2;
     int nVersion;
+    int type;
     std::vector<CTxIn> vin;
     std::vector<CTxOut> vout;
     unsigned int nLockTime;
@@ -195,6 +196,7 @@ public:
     (
         READWRITE(this->nVersion);
         nVersion = this->nVersion;
+        type = type->type
         READWRITE(vin);
         READWRITE(vout);
         READWRITE(nLockTime);
@@ -203,6 +205,7 @@ public:
     void SetNull()
     {
         nVersion = CTransaction::CURRENT_VERSION;
+        type = 0;
         vin.clear();
         vout.clear();
         nLockTime = 0;
@@ -224,6 +227,7 @@ public:
     friend bool operator==(const CTransaction& a, const CTransaction& b)
     {
         return (a.nVersion  == b.nVersion &&
+                a.type      == b.type &&
                 a.vin       == b.vin &&
                 a.vout      == b.vout &&
                 a.nLockTime == b.nLockTime);
@@ -338,12 +342,13 @@ public:
  *   - In case both bit 2 and bit 4 are unset, they encode N-1, as there must be at
  *     least one non-spent output).
  *
- * Example: 0104835800816115944e077fe7c803cfa57f29b36bf87c1d358bb85e
- *          <><><--------------------------------------------><---->
- *          |  \                  |                             /
- *    version   code             vout[1]                  height
+ * Example: 010004835800816115944e077fe7c803cfa57f29b36bf87c1d358bb85e
+ *          <><><><--------------------------------------------><---->
+ *          |  | \                  |                             /
+ *    version type code             vout[1]                  height
  *
  *    - version = 1
+ *    - type = 0 (Genesis)
  *    - code = 4 (vout[1] is not spent, and 0 non-zero bytes of bitvector follow)
  *    - unspentness bitvector: as 0 non-zero bytes follow, it has length 0
  *    - vout[1]: 835800816115944e077fe7c803cfa57f29b36bf87c1d35
@@ -353,12 +358,13 @@ public:
  *    - height = 203998
  *
  *
- * Example: 0109044086ef97d5790061b01caab50f1b8e9c50a5057eb43c2d9563a4eebbd123008c988f1a4a4de2161e0f50aac7f17e7f9555caa486af3b
- *          <><><--><--------------------------------------------------><----------------------------------------------><---->
- *         /  \   \                     |                                                           |                     /
- *  version  code  unspentness       vout[4]                                                     vout[16]           height
+ * Example: 010009044086ef97d5790061b01caab50f1b8e9c50a5057eb43c2d9563a4eebbd123008c988f1a4a4de2161e0f50aac7f17e7f9555caa486af3b
+ *          <><><><--><--------------------------------------------------><----------------------------------------------><---->
+ *         /  |   \   \                     |                                                           |                     /
+ *  version  type code  unspentness       vout[4]                                                     vout[16]           height
  *
  *  - version = 1
+ *  - type = 0 (Genesis)
  *  - code = 9 (coinbase, neither vout[0] or vout[1] are unspent,
  *                2 (1, +1 because both bit 2 and bit 4 are unset) non-zero bitvector bytes follow)
  *  - unspentness bitvector: bits 2 (0x04) and 14 (0x4000) are set, so vout[2+2] and vout[14+2] are unspent

@@ -110,9 +110,10 @@ bool CTransaction::IsNewerThan(const CTransaction& old) const
 std::string CTransaction::ToString() const
 {
     std::string str;
-    str += strprintf("CTransaction(hash=%s, ver=%d, vin.size=%"PRIszu", vout.size=%"PRIszu", nLockTime=%u)\n",
+    str += strprintf("CTransaction(hash=%s, ver=%d, type=%d, vin.size=%"PRIszu", vout.size=%"PRIszu", nLockTime=%u)\n",
         GetHash().ToString().substr(0,10).c_str(),
         nVersion,
+        type,
         vin.size(),
         vout.size(),
         nLockTime);
@@ -215,6 +216,7 @@ bool CCoins::Spend(const COutPoint &out, CTxInUndo &undo) {
         undo.nHeight = nHeight;
         undo.fCoinBase = fCoinBase;
         undo.nVersion = this->nVersion;
+        undo.type = this->type;
     }
     return true;
 }
