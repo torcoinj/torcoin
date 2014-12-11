@@ -58,14 +58,14 @@ public:
         genesis.nVersion = 1;
         genesis.nTime    = 1417976555;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 0;
+        genesis.nNonce   = 8695091;
         
         //// debug print
         hashGenesisBlock = genesis.GetHash();
-        while (hashGenesisBlock > bnProofOfWorkLimit.getuint256()){
-            if (++genesis.nNonce==0) break;
-            hashGenesisBlock = genesis.GetHash();
-        }
+        //while (hashGenesisBlock > bnProofOfWorkLimit.getuint256()){
+        //    if (++genesis.nNonce==0) break;
+        //    hashGenesisBlock = genesis.GetHash();
+        //}
 
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", genesis.hashMerkleRoot.ToString().c_str());
@@ -73,8 +73,8 @@ public:
         genesis.print();
         
         
-        assert(hashGenesisBlock == uint256("0x0000010497296153a3a1802e5b8363d2a115a3442bad7d92a50942b1e4f41f92"));
-        assert(genesis.hashMerkleRoot == uint256("0x9f16973b8f172c5338c9b12b94ace162bcef730ae098d4ac04cdfefb44f5e44e"));
+        assert(hashGenesisBlock == uint256("0x0000002b289779842f67ae3974d366c41520bbf9001549374a0d123b16277de8"));
+        assert(genesis.hashMerkleRoot == uint256("0x44492e8cbf7acd45168c265225bd445d3fdd27edf50076d5ce37d68248054052"));
 
         vSeeds.push_back(CDNSSeedData("torcoin.benjaminchrobot.com", "torcoin.benjaminchrobot.com"));
 
