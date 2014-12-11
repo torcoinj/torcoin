@@ -188,7 +188,7 @@ public:
     int64 GetImmatureBalance() const;
     bool CreateTransaction(const std::vector<std::pair<CScript, int64> >& vecSend,
                            CWalletTx& wtxNew, CReserveKey& reservekey, int64& nFeeRet, std::string& strFailReason);
-    bool CreateTransaction(CScript scriptPubKey, int64 nValue,
+    bool CreateTransaction(CScript scriptPubKey, int type, int64 nValue,
                            CWalletTx& wtxNew, CReserveKey& reservekey, int64& nFeeRet, std::string& strFailReason);
     bool CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey);
     std::string SendMoney(CScript scriptPubKey, int type, int64 nValue, CWalletTx& wtxNew, bool fAskFee=false);

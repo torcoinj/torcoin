@@ -1325,12 +1325,12 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64> >& vecSend,
     return true;
 }
 
-bool CWallet::CreateTransaction(CScript scriptPubKey, int64 nValue,
+bool CWallet::CreateTransaction(CScript scriptPubKey, int type, int64 nValue,
                                 CWalletTx& wtxNew, CReserveKey& reservekey, int64& nFeeRet, std::string& strFailReason)
 {
     vector< pair<CScript, int64> > vecSend;
     vecSend.push_back(make_pair(scriptPubKey, nValue));
-    return CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason);
+    return CreateTransaction(vecSend, type, wtxNew, reservekey, nFeeRet, strFailReason);
 }
 
 // Call after CreateTransaction unless you want to abort
