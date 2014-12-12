@@ -27,8 +27,8 @@ public:
         pchMessageStart[1] = 0xc5;
         pchMessageStart[2] = 0x4f;
         pchMessageStart[3] = 0x2c;
-        nDefaultPort = 6530;
-        nRPCPort = 6531;
+        nDefaultPort = 5530;
+        nRPCPort = 5531;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 22);
         nSubsidyHalvingInterval = 100000;
 
@@ -62,10 +62,12 @@ public:
         
         //// debug print
         hashGenesisBlock = genesis.GetHash();
-        //while (hashGenesisBlock > bnProofOfWorkLimit.getuint256()){
-        //    if (++genesis.nNonce==0) break;
-        //    hashGenesisBlock = genesis.GetHash();
-        //}
+	if (false) {
+	    while (hashGenesisBlock > bnProofOfWorkLimit.getuint256()){
+            if (++genesis.nNonce==0) break;
+                hashGenesisBlock = genesis.GetHash();
+	    }
+        }
 
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", genesis.hashMerkleRoot.ToString().c_str());
